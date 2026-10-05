@@ -7,42 +7,8 @@
   overflow: hidden;
 }
 
-/* Mosaic: coloured pieces separated by grout lines in the page colour. */
-.zellige--mosaic path {
-  stroke: var(--z-grout);
-  stroke-width: var(--z-grout-width, 1.6);
-  stroke-linejoin: round;
-}
-.zellige--mosaic .z-primary {
-  fill: var(--z-a, var(--z-primary));
-}
-.zellige--mosaic .z-secondary {
-  fill: var(--z-b, var(--z-secondary));
-}
-.zellige--mosaic .z-tertiary {
-  fill: var(--z-tertiary);
-}
-.zellige--mosaic .z-neutral {
-  fill: var(--z-neutral);
-}
-.zellige--mosaic .z-ink {
-  fill: var(--z-ink);
-}
-/* Checkerboard alternation: every other cell swaps its two main colours.
-   Custom properties inherit into <use> clones (selectors do not). */
-.zellige--mosaic .zt[data-alt] {
-  --z-a: var(--z-secondary);
-  --z-b: var(--z-primary);
-}
-
-/* Line: outlines only, in currentColor. */
-.zellige--line path {
-  fill: none;
-  stroke: currentColor;
-  /* In tile units (a period is 100): about 1 px at the usual display sizes. */
-  stroke-width: var(--z-line-width, 1.2);
-  stroke-linejoin: round;
-}
+/* Piece colours and strokes are inline styles in Zellige.tsx, not rules
+   here: page selectors do not reach <use> clones in Firefox / Safari. */
 
 /* Tile-by-tile reveal: a wave of fade + slight zoom from the centre.
    Each tile carries --t (0 = centre, 1 = edge); <ZelligeReveal> adds

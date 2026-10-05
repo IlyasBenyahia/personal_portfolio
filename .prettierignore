@@ -5,3 +5,4 @@ package-lock.json
 wrangler.jsonc
 .wrangler
 docs/lighthouse
+tests/visual/__screenshots__

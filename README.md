@@ -13,6 +13,8 @@ Growth Engineer. Site 100 % statique, bilingue FR/EN.
   depuis GitHub, domaine (DNS Hostinger, email conservé), Search Console.
 - [`docs/lighthouse/`](docs/lighthouse/README.md) : rapports Lighthouse et audit
   d'accessibilité.
+- [`docs/visual-regression/`](docs/visual-regression/README.md) : captures de
+  référence et test de régression visuelle du motif zellige.
 - [`TODO.md`](TODO.md) : contenus et fichiers restant à fournir.
 - [`CLAUDE.md`](CLAUDE.md) : architecture, conventions et règles du projet.
 
@@ -31,6 +33,7 @@ npm run build          # export statique dans out/
 ```
 
 Autres commandes : `npm run lint`, `npm run typecheck`, `npm run check`,
+`npm run test:visual` (après `npm run build`),
 `npm run start` (sert `out/`), `npm run deploy`.
 
 ## Modifier les contenus
