@@ -45,18 +45,34 @@ messages/                 fr.json, en.json (toutes les chaînes)
 public/_headers           sécurité + cache Cloudflare
 src/app/
   (root)/                 « / » : redirige vers /fr ou /en (langue du navigateur)
-  [locale]/               layout racine localisé (html lang) + pages
+  [locale]/               layout racine localisé (html lang) + accueil
+  [locale]/projects/[slug] études de cas (une page par projet et par langue)
   global-not-found.tsx    404.html unique, bilingue
   fonts.ts, globals.css   polices et jetons de thème
+src/content/               données typées (profil, parcours, formation, compétences,
+                          projets, jeux) : textes bilingues { fr, en }
 src/components/
   layout/                 SkipLink, SiteHeader, MobileMenu, LocaleSwitcher, SiteFooter
-  sections/               sections de l'accueil (Hero, …)
+  sections/               sections de l'accueil (Hero, About, Skills, …)
+  projects/               visuels et badges des études de cas
+  ui/                     Section, SectionHeading, TodoText, Badge, ExternalLink…
   theme/                  ThemeToggle + script anti-flash
   zellige/                moteur du motif (voir plus bas)
 src/i18n/                 routing.ts, navigation.ts, request.ts
 src/lib/                  site.ts (constantes), analytics.ts (phase 4)
 src/zellige/              config.ts (tuile du site), tiles/*.svg, README.md
 ```
+
+## Contenus
+
+- Textes d'interface : `messages/*.json`. Contenus (parcours, projets…) :
+  `src/content/*.ts`, typés par `src/content/types.ts`, avec des champs
+  `Localized` (`{ fr, en }`).
+- Valeur inconnue : chaîne commençant par `TODO:`, affichée par `<TodoText>`
+  comme un encadré pointillé visible. Dates inconnues : `null`.
+- Projets privés : `privateSource: true` (badge, pas de lien vers le code).
+  Projets placeholder : `placeholder: true` (badge + `noindex`).
+- Les compétences de `skills.ts` sont la seule source des objets du mini-jeu.
 
 ## Thème et design (direction B « Atelier Zellige »)
 
@@ -111,7 +127,7 @@ Variables d'environnement : voir `.env.example` (`.env` est ignoré par git).
 
 - [x] Prototype zellige (validé : direction B)
 - [x] Phase 1 : socle (i18n statique, thème, polices, layout, Cloudflare, docs)
-- [ ] Phase 2 : contenus typés + toutes les sections + études de cas
+- [x] Phase 2 : contenus typés + toutes les sections + études de cas
 - [ ] Phase 3 : SEO (metadata, hreflang, sitemap, robots, JSON-LD, OG, blog caché)
 - [ ] Phase 4 : contact Web3Forms, analytics (Umami + Cloudflare), images
 - [ ] Phase 5 : mini-jeu « Ship It! »

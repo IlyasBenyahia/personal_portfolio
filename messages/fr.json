@@ -50,5 +50,88 @@
     "rights": "© {year} Ilyas Benyahia",
     "builtWith": "Site statique conçu et développé par Ilyas Benyahia avec Next.js.",
     "backToTop": "Retour en haut"
+  },
+  "About": {
+    "title": "À propos",
+    "p1": "Je suis Ilyas Benyahia, front-end developer et UI/UX designer basé à Rabat / Témara, au Maroc. Mon parcours a commencé par la gestion des entreprises, s’est poursuivi par l’infographie et la communication digitale, et se prolonge aujourd’hui par un Master en marketing stratégique.",
+    "p2": "J’ai un double profil : le web, où je conçois et développe des interfaces en React et Next.js, et le jeu vidéo, où je crée des jeux indépendants comme Colors Recipe.",
+    "p3": "Mon ambition : créer des produits digitaux rentables, de l’idée jusqu’à la croissance. C’est ce qui me mène vers le rôle de Growth Engineer.",
+    "photoTodo": "TODO: photo d’Ilyas Benyahia",
+    "photoAlt": "Portrait d’Ilyas Benyahia",
+    "location": "Localisation",
+    "languages": "Langues"
+  },
+  "Skills": {
+    "title": "Compétences",
+    "intro": "Trois savoir-faire pour porter un produit digital de bout en bout.",
+    "pillars": {
+      "design": {
+        "title": "Concevoir",
+        "description": "Des interfaces claires et des identités visuelles, de la maquette Figma à l’animation."
+      },
+      "develop": {
+        "title": "Développer",
+        "description": "Des sites et applications en React / Next.js, WordPress et Shopify, et des jeux en Unity ou en JavaScript."
+      },
+      "grow": {
+        "title": "Faire croître",
+        "description": "SEO technique et éditorial, campagnes Google Ads et Facebook Ads, stratégie marketing."
+      }
+    }
+  },
+  "Experience": {
+    "title": "Parcours professionnel",
+    "present": "présent",
+    "missions": "Missions"
+  },
+  "Projects": {
+    "title": "Projets",
+    "intro": "Études de cas : contexte, rôle, technologies et résultats. Beaucoup de mes projets sont privés : je les présente sans leur code.",
+    "privateSource": "Code source privé",
+    "placeholder": "Projet à compléter",
+    "viewCase": "Voir l’étude de cas",
+    "viewCaseOf": "Voir l’étude de cas : {title}"
+  },
+  "CaseStudy": {
+    "breadcrumb": "Fil d’Ariane",
+    "back": "Tous les projets",
+    "context": "Contexte",
+    "role": "Mon rôle",
+    "technologies": "Technologies",
+    "result": "Résultat",
+    "visuals": "Visuels",
+    "visualTodo": "Capture à venir",
+    "demo": "Voir la démo",
+    "source": "Voir le code",
+    "privateNote": "Le code de ce projet est privé : il est présenté ici par des captures et une description.",
+    "year": "Année",
+    "yearTodo": "TODO: année",
+    "next": "Projet suivant"
+  },
+  "Games": {
+    "title": "Jeux",
+    "intro": "En parallèle du web, je suis indie game developer : je conçois et publie mes propres jeux.",
+    "play": "Voir {title} sur {platform}",
+    "published": "Publié",
+    "upcomingTitle": "Nouveau portfolio de jeux en préparation",
+    "upcomingText": "Un espace dédié à mes jeux et à mes prototypes arrive bientôt.",
+    "upcoming": "Bientôt"
+  },
+  "Education": {
+    "title": "Formation",
+    "expected": "Fin prévue en {date}",
+    "yearTodo": "TODO: année d’obtention"
+  },
+  "Contact": {
+    "title": "Contact",
+    "intro": "Un poste, une mission freelance ou un produit à lancer ? Écrivez-moi.",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "whatsappCta": "Écrire sur WhatsApp",
+    "elsewhere": "Ailleurs sur le web",
+    "cv": "Télécharger mon CV",
+    "cvFr": "CV en français (PDF)",
+    "cvEn": "CV en anglais (PDF)",
+    "newTab": "(nouvel onglet)"
   }
 }

@@ -22,7 +22,8 @@ Autres commandes : `npm run lint`, `npm run typecheck`, `npm run check`,
 ## Modifier les contenus
 
 - Textes de l'interface : `messages/fr.json` et `messages/en.json`.
-- Parcours, projets, compétences, formation : `src/content/` (phase 2).
+- Parcours, projets, compétences, formation, jeux, profil : `src/content/*.ts`
+  (textes `{ fr, en }`, valeurs manquantes préfixées `TODO:`).
 
 ## Motif zellige : utiliser vos propres tuiles
 
