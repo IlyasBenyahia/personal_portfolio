@@ -16,10 +16,10 @@
   --blue: #1e40af; /* bleu de Fès */
   --teal: #0f766e;
 
-  /* Zellige mosaic */
-  --z-primary: #c2410c;
-  --z-secondary: #1e40af;
-  --z-tertiary: #0f766e;
+  /* Zellige mosaic (slightly desaturated so it never fights the content) */
+  --z-primary: #b35028;
+  --z-secondary: #354fa4;
+  --z-tertiary: #1f6e68;
   --z-neutral: #e6d9c2;
   --z-ink: #1c1917;
   --z-grout: var(--bg);

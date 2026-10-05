@@ -13,17 +13,30 @@ import {
  * Turns a seamless tile drawn in Illustrator (or any editor) into a ZelligeTile,
  * at build time. Files live in `src/zellige/tiles/`.
  *
- * Authoring rules (see src/zellige/tiles/README.md):
+ * Authoring rules (see src/zellige/README.md):
  * - The artboard = one repeat. Its size gives the viewBox, i.e. the period.
  * - Shapes may overflow the artboard: the neighbouring repeats complete them.
  * - Colour roles: name a layer/group/object `primary`, `secondary`, `tertiary`,
  *   `neutral` or `ink` (Illustrator exports the name as `id`, e.g. `primary-2`),
- *   or set `data-role`. Unnamed shapes get a role per distinct fill colour,
- *   in order of appearance.
+ *   or set `data-role`, or fill with one of the REFERENCE_FILLS below. Other
+ *   shapes get a role per distinct fill colour, in order of appearance.
  * - Supported elements: path, polygon, polyline, rect, circle, ellipse, line.
  */
 
 const ROLES: ZelligeRole[] = ['primary', 'secondary', 'tertiary', 'neutral', 'ink'];
+
+/**
+ * Reference swatches: draw with these exact colours and each shape is
+ * recoloured with the matching site token (light / dark). Keep in sync with
+ * src/zellige/README.md.
+ */
+export const REFERENCE_FILLS: Record<string, ZelligeRole> = {
+  '#c2410c': 'primary',
+  '#1e40af': 'secondary',
+  '#0f766e': 'tertiary',
+  '#e6d9c2': 'neutral',
+  '#1c1917': 'ink',
+};
 const SHAPES = new Set(['path', 'polygon', 'polyline', 'rect', 'circle', 'ellipse', 'line']);
 
 function attrs(source: string): Record<string, string> {
@@ -139,9 +152,9 @@ export function parseSvgTile(svg: string): ZelligeTile {
       a.fill ??
       /fill\s*:\s*([^;]+)/.exec(a.style ?? '')?.[1]?.trim() ??
       (a.class ? fills[a.class.split(/\s+/)[0]!] : undefined);
-    let pieceRole = role ?? parent?.role;
+    const key = (fill ?? 'none').toLowerCase();
+    let pieceRole = role ?? parent?.role ?? REFERENCE_FILLS[key];
     if (!pieceRole) {
-      const key = (fill ?? 'none').toLowerCase();
       if (!colourRoles.has(key)) colourRoles.set(key, ROLES[colourRoles.size % ROLES.length]!);
       pieceRole = colourRoles.get(key)!;
     }

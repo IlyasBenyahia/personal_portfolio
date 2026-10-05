@@ -1,0 +1,12 @@
+// Cloudflare Workers Static Assets: serves the static export in out/ (no Worker code).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "benyahiailyas-portfolio",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    // /fr serves out/fr.html; unknown URLs get out/404.html with a 404 status.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

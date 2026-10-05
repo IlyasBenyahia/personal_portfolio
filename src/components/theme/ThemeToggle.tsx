@@ -1,9 +1,17 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 type Theme = 'system' | 'light' | 'dark';
-const LABELS: Record<Theme, string> = { system: 'Système', light: 'Clair', dark: 'Sombre' };
+const THEMES: Theme[] = ['system', 'light', 'dark'];
+
+const ICONS: Record<Theme, string> = {
+  system: 'M4 5h16v11H4zM9 20h6M12 16v4',
+  light:
+    'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',
+  dark: 'M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z',
+};
 
 function applyTheme(t: Theme) {
   const root = document.documentElement;
@@ -18,31 +26,43 @@ function applyTheme(t: Theme) {
 }
 
 export function ThemeToggle() {
+  const t = useTranslations('Theme');
   const [theme, setTheme] = useState<Theme>('system');
 
   useEffect(() => {
-    const t = document.documentElement.dataset.theme;
+    const stored = document.documentElement.dataset.theme;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- sync with the pre-paint script
-    if (t === 'light' || t === 'dark') setTheme(t);
+    if (stored === 'light' || stored === 'dark') setTheme(stored);
   }, []);
 
-  const choose = (t: Theme) => {
-    setTheme(t);
-    applyTheme(t);
-  };
-
   return (
-    <fieldset className="border-line flex items-center gap-1 rounded-full border p-1 font-mono text-xs">
-      <legend className="sr-only">Thème</legend>
-      {(Object.keys(LABELS) as Theme[]).map((t) => (
+    <fieldset className="flex w-fit items-center rounded-full border border-line p-1">
+      <legend className="sr-only">{t('label')}</legend>
+      {THEMES.map((value) => (
         <button
-          key={t}
+          key={value}
           type="button"
-          aria-pressed={theme === t}
-          onClick={() => choose(t)}
-          className="text-muted hover:text-fg aria-pressed:bg-fg aria-pressed:text-bg rounded-full px-3 py-1.5 transition-colors"
+          aria-pressed={theme === value}
+          title={t(value)}
+          onClick={() => {
+            setTheme(value);
+            applyTheme(value);
+          }}
+          className="grid size-8 place-items-center rounded-full text-muted transition-colors hover:text-fg aria-pressed:bg-fg aria-pressed:text-bg"
         >
-          {LABELS[t]}
+          <svg
+            viewBox="0 0 24 24"
+            className="size-4"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d={ICONS[value]} />
+          </svg>
+          <span className="sr-only">{t(value)}</span>
         </button>
       ))}
     </fieldset>

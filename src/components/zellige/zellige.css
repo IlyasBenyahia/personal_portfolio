@@ -45,44 +45,20 @@
   stroke-linejoin: round;
 }
 
-/* Tile-by-tile build, driven by --p (0→1) on an ancestor. */
-.zellige[data-animate] .zt {
-  --k: clamp(0, calc((var(--p, 1) * 1.15 - var(--t, 0)) * 7), 1);
-  opacity: var(--k);
-  transform: scale(calc(0.35 + 0.65 * var(--k))) rotate(calc((1 - var(--k)) * -90deg));
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.zellige-build {
-  --p: 1;
-  position: relative;
-}
+/* Tile-by-tile reveal: a wave of fade + slight zoom from the centre.
+   Each tile carries --t (0 = centre, 1 = edge); <ZelligeReveal> adds
+   data-revealed once the surface scrolls into view. */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
-  .zellige-build {
-    --p: 0;
+  .zellige-reveal:not([data-revealed]) .zellige[data-animate] .zt {
+    opacity: 0;
+    transform: scale(0.92);
   }
-}
-.zellige-build__stage {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-
-@media (prefers-reduced-motion: reduce) {
   .zellige[data-animate] .zt {
-    opacity: 1;
-    transform: none;
-  }
-  .zellige-build {
-    height: auto !important;
-  }
-  .zellige-build__stage {
-    position: static;
-    height: auto;
-    padding-block: 4rem;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition:
+      opacity 520ms ease-out,
+      transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--t, 0) * var(--z-wave, 1100ms));
   }
 }

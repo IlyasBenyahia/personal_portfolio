@@ -1,0 +1,54 @@
+{
+  "Metadata": {
+    "siteName": "Ilyas Benyahia",
+    "homeTitle": "Ilyas Benyahia · Front-end Developer & UI/UX Designer, Growth Engineer",
+    "homeDescription": "Ilyas Benyahia, développeur front-end React / Next.js et UI/UX designer au Maroc (Rabat). Je conçois, développe et fais croître des produits digitaux de bout en bout."
+  },
+  "Common": {
+    "skipToContent": "Aller au contenu",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "mainNav": "Navigation principale",
+    "home": "Accueil"
+  },
+  "Nav": {
+    "about": "À propos",
+    "skills": "Compétences",
+    "experience": "Parcours",
+    "projects": "Projets",
+    "games": "Jeux",
+    "education": "Formation",
+    "contact": "Contact"
+  },
+  "Theme": {
+    "label": "Thème",
+    "system": "Système",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "LocaleSwitcher": {
+    "label": "Langue",
+    "switchTo": "Passer en {language}",
+    "fr": "Français",
+    "en": "English"
+  },
+  "Hero": {
+    "eyebrow": "Front-end Developer & UI/UX Designer",
+    "title": "Ilyas Benyahia",
+    "role": "Futur Growth Engineer, basé à Rabat / Témara, Maroc",
+    "tagline": "Je porte un produit digital de bout en bout : je le conçois, je le développe, puis je le fais croître.",
+    "pillars": {
+      "design": "Concevoir",
+      "develop": "Développer",
+      "grow": "Faire croître"
+    },
+    "ctaProjects": "Voir mes projets",
+    "ctaContact": "Me contacter",
+    "ctaPlay": "Jouer"
+  },
+  "Footer": {
+    "rights": "© {year} Ilyas Benyahia",
+    "builtWith": "Site statique conçu et développé par Ilyas Benyahia avec Next.js.",
+    "backToTop": "Retour en haut"
+  }
+}
