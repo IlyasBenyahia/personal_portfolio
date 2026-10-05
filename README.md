@@ -7,6 +7,15 @@ Growth Engineer. Site 100 % statique, bilingue FR/EN.
 - next-intl (routes `/fr` et `/en`, sans middleware)
 - Hébergement : Cloudflare Workers Static Assets
 
+## Documentation
+
+- [`docs/DEPLOIEMENT.md`](docs/DEPLOIEMENT.md) : mise en ligne sur Cloudflare
+  depuis GitHub, domaine (DNS Hostinger, email conservé), Search Console.
+- [`docs/lighthouse/`](docs/lighthouse/README.md) : rapports Lighthouse et audit
+  d'accessibilité.
+- [`TODO.md`](TODO.md) : contenus et fichiers restant à fournir.
+- [`CLAUDE.md`](CLAUDE.md) : architecture, conventions et règles du projet.
+
 ## Prérequis
 
 - **Node.js 22 LTS** (≥ 22.12, voir `.nvmrc` : `nvm use`) et npm ≥ 10.

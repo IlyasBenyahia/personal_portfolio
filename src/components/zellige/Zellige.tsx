@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useId, type CSSProperties } from 'react';
 import { khatamTile, layoutTile, type ZelligeTile } from './geometry';
 
 export interface ZelligeProps {
@@ -9,7 +9,7 @@ export interface ZelligeProps {
   rows?: number;
   /** `mosaic`: coloured pieces with grout lines. `line`: outlines only (currentColor). */
   variant?: 'mosaic' | 'line';
-  /** Each tile reveals as `--p` (0→1) passes its build order. Driven by <ZelligeScrollBuild>. */
+  /** Each tile fades in as a wave from the centre. Wrap in <ZelligeReveal>. */
   animate?: boolean;
   /** Imported SVG tiles only: keep the file's own colours instead of the palette. */
   keepColors?: boolean;
@@ -19,7 +19,15 @@ export interface ZelligeProps {
   style?: CSSProperties;
 }
 
-/** Decorative zellige surface, rendered as static SVG at build time. */
+/**
+ * Decorative zellige surface, rendered as static SVG at build time.
+ *
+ * Each motif is defined once in <defs>. Static surfaces repeat it through an
+ * SVG <pattern> (2 × 2 cells, for the checkerboard colour swap), so a surface
+ * costs about 1 KB whatever its size. Animated surfaces need one element per
+ * tile, so they place lightweight <use> references instead of copying paths.
+ * The checkerboard swap uses inherited CSS variables, which reach <use> clones.
+ */
 export function Zellige({
   tile = khatamTile(),
   cols = 8,
@@ -31,43 +39,103 @@ export function Zellige({
   className,
   style,
 }: ZelligeProps) {
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
   const width = cols * tile.width;
   const height = rows * tile.height;
-  const placed = layoutTile(tile, cols, rows);
+  const motifId = (i: number) => `${uid}-m${i}`;
 
+  const defs = tile.motifs.map((motif, i) => {
+    const pieces = variant === 'line' ? (motif.outline ?? motif.pieces) : motif.pieces;
+    return (
+      <g key={motif.id} id={motifId(i)}>
+        {pieces.map((p, j) => (
+          <path
+            key={j}
+            d={p.d}
+            className={keepColors ? undefined : `z-${p.role}`}
+            fillRule={p.fillRule}
+            transform={p.transform}
+            fill={keepColors ? p.fill : undefined}
+          />
+        ))}
+      </g>
+    );
+  });
+
+  const svgProps = {
+    viewBox: `0 0 ${width} ${height}`,
+    preserveAspectRatio: `xMidYMid ${fit}`,
+    className: ['zellige', `zellige--${variant}`, className].filter(Boolean).join(' '),
+    style,
+    'aria-hidden': true,
+    focusable: false,
+  } as const;
+
+  if (animate) {
+    // Only tiles that can show inside the viewBox (motifs span about one period).
+    const placed = layoutTile(tile, cols, rows).filter(
+      ({ x, y }) =>
+        x > -tile.width / 2 &&
+        x < width + tile.width / 2 &&
+        y > -tile.height / 2 &&
+        y < height + tile.height / 2,
+    );
+    return (
+      <svg {...svgProps} data-animate="">
+        <defs>{defs}</defs>
+        {placed.map(({ key, motif, x, y, order, col, row }) => (
+          <use
+            key={key}
+            href={`#${motifId(tile.motifs.indexOf(motif))}`}
+            x={x}
+            y={y}
+            className="zt"
+            data-alt={(col + row) % 2 === 1 || undefined}
+            style={{ '--t': order } as CSSProperties}
+          />
+        ))}
+      </svg>
+    );
+  }
+
+  // One pattern tile = 2 × 2 cells; every motif also drawn from the
+  // neighbouring repeats so pieces straddling the edges are complete.
+  const cells: { x: number; y: number; alt: boolean }[] = [];
+  for (let row = -1; row <= 2; row++) {
+    for (let col = -1; col <= 2; col++) {
+      cells.push({
+        x: col * tile.width,
+        y: row * tile.height,
+        alt: (((col + row) % 2) + 2) % 2 === 1,
+      });
+    }
+  }
+  const patternId = `${uid}-p`;
   return (
-    <svg
-      viewBox={`0 0 ${width} ${height}`}
-      preserveAspectRatio={`xMidYMid ${fit}`}
-      className={['zellige', `zellige--${variant}`, className].filter(Boolean).join(' ')}
-      data-animate={animate || undefined}
-      style={style}
-      aria-hidden="true"
-      focusable="false"
-    >
-      {placed.map(({ key, motif, x, y, order, col, row }) => {
-        const pieces = variant === 'line' ? (motif.outline ?? motif.pieces) : motif.pieces;
-        return (
-          <g key={key} transform={`translate(${x} ${y})`}>
-            <g
-              className="zt"
-              data-alt={(col + row) % 2 === 1 || undefined}
-              style={animate ? ({ '--t': order } as CSSProperties) : undefined}
-            >
-              {pieces.map((p, i) => (
-                <path
-                  key={i}
-                  d={p.d}
-                  className={keepColors ? undefined : `z-${p.role}`}
-                  fillRule={p.fillRule}
-                  transform={p.transform}
-                  fill={keepColors ? p.fill : undefined}
-                />
-              ))}
-            </g>
-          </g>
-        );
-      })}
+    <svg {...svgProps}>
+      <defs>
+        {defs}
+        <pattern
+          id={patternId}
+          patternUnits="userSpaceOnUse"
+          width={tile.width * 2}
+          height={tile.height * 2}
+        >
+          {cells.flatMap((cell) =>
+            tile.motifs.map((motif, i) => (
+              <use
+                key={`${cell.x}-${cell.y}-${i}`}
+                href={`#${motifId(i)}`}
+                x={cell.x + motif.offset[0]}
+                y={cell.y + motif.offset[1]}
+                className="zt"
+                data-alt={cell.alt || undefined}
+              />
+            )),
+          )}
+        </pattern>
+      </defs>
+      <rect width={width} height={height} fill={`url(#${patternId})`} />
     </svg>
   );
 }

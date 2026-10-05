@@ -3,3 +3,5 @@ node_modules
 out
 package-lock.json
 wrangler.jsonc
+.wrangler
+docs/lighthouse

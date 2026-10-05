@@ -1,6 +1,6 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { profile } from '@/content/profile';
-import { ContactForm } from '@/components/contact/ContactForm';
+import { ContactForm, type ContactFormLabels } from '@/components/contact/ContactForm';
 import { ExternalLink } from '@/components/ui/ExternalLink';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -10,6 +10,34 @@ export function Contact({ index }: { index: number }) {
   const t = useTranslations('Contact');
   const tForm = useTranslations('ContactForm');
   const locale = useLocale();
+  const email = profile.email;
+  const formLabels: ContactFormLabels = {
+    name: tForm('name'),
+    email: tForm('email'),
+    message: tForm('message'),
+    required: tForm('required'),
+    submit: tForm('submit'),
+    sending: tForm('sending'),
+    success: tForm('success'),
+    error: tForm('error', { email }),
+    configError: tForm('configError', { email }),
+    honeypot: tForm('honeypot'),
+    privacy: tForm('privacy'),
+    privacyLink: tForm('privacyLink'),
+    subject: tForm('subject'),
+    errors: {
+      nameRequired: tForm('errors.nameRequired'),
+      emailRequired: tForm('errors.emailRequired'),
+      emailInvalid: tForm('errors.emailInvalid'),
+      messageRequired: tForm('errors.messageRequired'),
+      messageShort: tForm('errors.messageShort'),
+    },
+    summary: [1, 2, 3].map((count) => tForm('errors.summary', { count })) as [
+      string,
+      string,
+      string,
+    ],
+  };
 
   return (
     <Section id="contact">
@@ -95,7 +123,7 @@ export function Contact({ index }: { index: number }) {
         <div className="rounded-2xl border border-line bg-surface p-6 sm:p-8">
           <h3 className="font-display text-2xl font-semibold">{tForm('title')}</h3>
           <div className="mt-6">
-            <ContactForm email={profile.email} />
+            <ContactForm labels={formLabels} />
           </div>
         </div>
       </div>

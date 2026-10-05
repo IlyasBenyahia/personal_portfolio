@@ -1,10 +1,15 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
 import { track } from '@/lib/analytics';
-import { sendContact, validateContact, WEB3FORMS_KEY, type FieldErrors } from '@/lib/web3forms';
+import {
+  sendContact,
+  validateContact,
+  WEB3FORMS_KEY,
+  type FieldErrorKey,
+  type FieldErrors,
+} from '@/lib/web3forms';
 
 type Status = 'idle' | 'sending' | 'success' | 'error' | 'config';
 type Field = 'name' | 'email' | 'message';
@@ -12,8 +17,27 @@ type Field = 'name' | 'email' | 'message';
 const inputClass =
   'mt-2 block w-full rounded-xl border border-line bg-bg px-4 py-3 text-base text-fg transition-colors placeholder:text-muted focus:border-fg focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent aria-[invalid=true]:border-accent';
 
-export function ContactForm({ email }: { email: string }) {
-  const t = useTranslations('ContactForm');
+/** All texts, already translated (and formatted) on the server. */
+export interface ContactFormLabels {
+  name: string;
+  email: string;
+  message: string;
+  required: string;
+  submit: string;
+  sending: string;
+  success: string;
+  error: string;
+  configError: string;
+  honeypot: string;
+  privacy: string;
+  privacyLink: string;
+  subject: string;
+  errors: Record<FieldErrorKey, string>;
+  /** Error summary for 1, 2 and 3 invalid fields (plural forms). */
+  summary: [string, string, string];
+}
+
+export function ContactForm({ labels: l }: { labels: ContactFormLabels }) {
   const id = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLParagraphElement>(null);
@@ -54,7 +78,7 @@ export function ContactForm({ email }: { email: string }) {
 
     setStatus('sending');
     try {
-      const ok = await sendContact({ ...values, subject: t('subject'), botcheck: false });
+      const ok = await sendContact({ ...values, subject: l.subject, botcheck: false });
       setStatus(ok ? 'success' : 'error');
       track({ name: 'contact_submit', data: { status: ok ? 'success' : 'error' } });
       if (ok) form.reset();
@@ -69,12 +93,12 @@ export function ContactForm({ email }: { email: string }) {
   const field = (f: Field, label: string, input: ReactNode) => (
     <div>
       <label htmlFor={fieldId(f)} className="font-medium">
-        {label} <span className="font-mono text-xs text-muted">({t('required')})</span>
+        {label} <span className="font-mono text-xs text-muted">({l.required})</span>
       </label>
       {input}
       {errors[f] && (
         <p id={errorId(f)} className="mt-2 text-sm text-accent">
-          {t(`errors.${errors[f]}`)}
+          {l.errors[errors[f]!]}
         </p>
       )}
     </div>
@@ -91,7 +115,7 @@ export function ContactForm({ email }: { email: string }) {
     <form ref={formRef} onSubmit={onSubmit} noValidate className="grid gap-5">
       {field(
         'name',
-        t('name'),
+        l.name,
         <input
           {...aria('name')}
           type="text"
@@ -102,7 +126,7 @@ export function ContactForm({ email }: { email: string }) {
       )}
       {field(
         'email',
-        t('email'),
+        l.email,
         <input
           {...aria('email')}
           type="email"
@@ -114,7 +138,7 @@ export function ContactForm({ email }: { email: string }) {
       )}
       {field(
         'message',
-        t('message'),
+        l.message,
         <textarea
           {...aria('message')}
           rows={6}
@@ -125,7 +149,7 @@ export function ContactForm({ email }: { email: string }) {
 
       {/* Honeypot: hidden from people and assistive tech, filled in by naive bots. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-        <label htmlFor={`${id}-botcheck`}>{t('honeypot')}</label>
+        <label htmlFor={`${id}-botcheck`}>{l.honeypot}</label>
         <input
           id={`${id}-botcheck`}
           type="checkbox"
@@ -141,20 +165,18 @@ export function ContactForm({ email }: { email: string }) {
           disabled={status === 'sending'}
           className="rounded-full bg-accent-strong px-6 py-3 font-medium text-on-accent transition hover:brightness-110 disabled:cursor-wait disabled:opacity-70"
         >
-          {status === 'sending' ? t('sending') : t('submit')}
+          {status === 'sending' ? l.sending : l.submit}
         </button>
         <p className="text-sm text-muted">
-          {t('privacy')}{' '}
+          {l.privacy}{' '}
           <Link href="/legal" className="underline underline-offset-4 hover:text-fg">
-            {t('privacyLink')}
+            {l.privacyLink}
           </Link>
         </p>
       </div>
 
       <div aria-live="polite" role="status">
-        {errorCount > 0 && (
-          <p className="text-sm text-accent">{t('errors.summary', { count: errorCount })}</p>
-        )}
+        {errorCount > 0 && <p className="text-sm text-accent">{l.summary[errorCount - 1]}</p>}
         {status !== 'idle' && status !== 'sending' && (
           <p
             ref={statusRef}
@@ -163,11 +185,7 @@ export function ContactForm({ email }: { email: string }) {
               status === 'success' ? 'border-teal text-teal' : 'border-accent text-accent'
             }`}
           >
-            {status === 'success'
-              ? t('success')
-              : status === 'config'
-                ? t('configError', { email })
-                : t('error', { email })}
+            {status === 'success' ? l.success : status === 'config' ? l.configError : l.error}
           </p>
         )}
       </div>

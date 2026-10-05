@@ -19,7 +19,7 @@ import { homeGraph } from '@/lib/structured-data';
 function MosaicSeparator() {
   return (
     <ZelligeReveal className="border-y border-line">
-      <SiteZellige cols={40} rows={1} fit="slice" animate className="h-14" />
+      <SiteZellige cols={28} rows={1} fit="slice" animate className="h-14" />
     </ZelligeReveal>
   );
 }

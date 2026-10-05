@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 type Theme = 'system' | 'light' | 'dark';
@@ -25,8 +24,9 @@ function applyTheme(t: Theme) {
   else root.dataset.theme = t;
 }
 
-export function ThemeToggle() {
-  const t = useTranslations('Theme');
+export type ThemeLabels = Record<'label' | Theme, string>;
+
+export function ThemeToggle({ labels }: { labels: ThemeLabels }) {
   const [theme, setTheme] = useState<Theme>('system');
 
   useEffect(() => {
@@ -37,13 +37,13 @@ export function ThemeToggle() {
 
   return (
     <fieldset className="flex w-fit items-center rounded-full border border-line p-1">
-      <legend className="sr-only">{t('label')}</legend>
+      <legend className="sr-only">{labels.label}</legend>
       {THEMES.map((value) => (
         <button
           key={value}
           type="button"
           aria-pressed={theme === value}
-          title={t(value)}
+          title={labels[value]}
           onClick={() => {
             setTheme(value);
             applyTheme(value);
@@ -62,7 +62,7 @@ export function ThemeToggle() {
           >
             <path d={ICONS[value]} />
           </svg>
-          <span className="sr-only">{t(value)}</span>
+          <span className="sr-only">{labels[value]}</span>
         </button>
       ))}
     </fieldset>

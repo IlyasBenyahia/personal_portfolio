@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { fontVariables } from '@/app/fonts';
 import { Analytics } from '@/components/analytics/Analytics';
@@ -49,15 +49,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="flex min-h-svh flex-col">
-        <NextIntlClientProvider>
-          <SkipLink />
-          <SiteHeader />
-          <main id="contenu" tabIndex={-1} className="flex-1 focus:outline-none">
-            {children}
-          </main>
-          <SiteFooter />
-          <Analytics />
-        </NextIntlClientProvider>
+        <SkipLink />
+        <SiteHeader />
+        <main id="contenu" tabIndex={-1} className="flex-1 focus:outline-none">
+          {children}
+        </main>
+        <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );
