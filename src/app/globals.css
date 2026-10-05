@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+@import '../components/zellige/zellige.css' layer(components);
+
+/* Theme: system preference by default, manual override via html[data-theme]. */
+
+:root {
+  color-scheme: light;
+  --bg: #f5f0e8;
+  --surface: #ede5d8;
+  --fg: #1c1917;
+  --muted: #57534e;
+  --line: #d6cab6;
+  --accent: #b23a0a; /* terracotta, text-safe (5.3:1) */
+  --accent-strong: #c2410c; /* terracotta, fills */
+  --on-accent: #ffffff;
+  --blue: #1e40af; /* bleu de Fès */
+  --teal: #0f766e;
+
+  /* Zellige mosaic (slightly desaturated so it never fights the content) */
+  --z-primary: #b35028;
+  --z-secondary: #354fa4;
+  --z-tertiary: #1f6e68;
+  --z-neutral: #e6d9c2;
+  --z-ink: #1c1917;
+  --z-grout: var(--bg);
+  --z-line: #1c1917;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #171412;
+    --surface: #221d1a;
+    --fg: #f5f0e8;
+    --muted: #a8a29e;
+    --line: #3a322c;
+    --accent: #f0844f;
+    --accent-strong: #ee7a42;
+    --on-accent: #171412;
+    --blue: #8aa7ff;
+    --teal: #3cc2b0;
+    --z-primary: #d4622e;
+    --z-secondary: #3a5fd0;
+    --z-tertiary: #1a9583;
+    --z-neutral: #3a302a;
+    --z-ink: #0c0a09;
+    --z-line: #f5f0e8;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #171412;
+  --surface: #221d1a;
+  --fg: #f5f0e8;
+  --muted: #a8a29e;
+  --line: #3a322c;
+  --accent: #f0844f;
+  --accent-strong: #ee7a42;
+  --on-accent: #171412;
+  --blue: #8aa7ff;
+  --teal: #3cc2b0;
+  --z-primary: #d4622e;
+  --z-secondary: #3a5fd0;
+  --z-tertiary: #1a9583;
+  --z-neutral: #3a302a;
+  --z-ink: #0c0a09;
+  --z-line: #f5f0e8;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-on-accent: var(--on-accent);
+  --color-blue: var(--blue);
+  --color-teal: var(--teal);
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

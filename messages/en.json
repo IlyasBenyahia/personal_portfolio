@@ -1,0 +1,137 @@
+{
+  "Metadata": {
+    "siteName": "Ilyas Benyahia",
+    "homeTitle": "Ilyas Benyahia · Front-end Developer & UI/UX Designer, Growth Engineer",
+    "homeDescription": "Ilyas Benyahia, React / Next.js front-end developer and UI/UX designer based in Morocco (Rabat). I design, build and grow digital products end to end."
+  },
+  "Common": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "home": "Home"
+  },
+  "Nav": {
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "games": "Games",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "Theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "switchTo": "Switch to {language}",
+    "fr": "Français",
+    "en": "English"
+  },
+  "Hero": {
+    "eyebrow": "Front-end Developer & UI/UX Designer",
+    "title": "Ilyas Benyahia",
+    "role": "Growth Engineer in the making, based in Rabat / Témara, Morocco",
+    "tagline": "I take a digital product from end to end: I design it, I build it, then I grow it.",
+    "pillars": {
+      "design": "Design",
+      "develop": "Develop",
+      "grow": "Grow"
+    },
+    "ctaProjects": "See my projects",
+    "ctaContact": "Contact me",
+    "ctaPlay": "Play"
+  },
+  "Footer": {
+    "rights": "© {year} Ilyas Benyahia",
+    "builtWith": "Static site designed and built by Ilyas Benyahia with Next.js.",
+    "backToTop": "Back to top"
+  },
+  "About": {
+    "title": "About",
+    "p1": "I’m Ilyas Benyahia, a front-end developer and UI/UX designer based in Rabat / Témara, Morocco. My path started in business management, continued through graphic design and digital communication, and now extends into a master’s degree in strategic marketing.",
+    "p2": "I have a dual profile: the web, where I design and build interfaces with React and Next.js, and video games, where I create indie games such as Colors Recipe.",
+    "p3": "My ambition: building profitable digital products, from the idea all the way to growth. That is what leads me towards the Growth Engineer role.",
+    "photoTodo": "TODO: photo of Ilyas Benyahia",
+    "photoAlt": "Portrait of Ilyas Benyahia",
+    "location": "Location",
+    "languages": "Languages"
+  },
+  "Skills": {
+    "title": "Skills",
+    "intro": "Three crafts to take a digital product from end to end.",
+    "pillars": {
+      "design": {
+        "title": "Design",
+        "description": "Clear interfaces and visual identities, from the Figma mock-up to motion."
+      },
+      "develop": {
+        "title": "Develop",
+        "description": "Websites and apps in React / Next.js, WordPress and Shopify, and games in Unity or JavaScript."
+      },
+      "grow": {
+        "title": "Grow",
+        "description": "Technical and editorial SEO, Google Ads and Facebook Ads campaigns, marketing strategy."
+      }
+    }
+  },
+  "Experience": {
+    "title": "Experience",
+    "present": "present",
+    "missions": "Responsibilities"
+  },
+  "Projects": {
+    "title": "Projects",
+    "intro": "Case studies: context, role, technologies and results. Many of my projects are private, so I present them without their code.",
+    "privateSource": "Private source code",
+    "placeholder": "Project to be completed",
+    "viewCase": "View case study",
+    "viewCaseOf": "View case study: {title}"
+  },
+  "CaseStudy": {
+    "breadcrumb": "Breadcrumb",
+    "back": "All projects",
+    "context": "Context",
+    "role": "My role",
+    "technologies": "Technologies",
+    "result": "Outcome",
+    "visuals": "Visuals",
+    "visualTodo": "Screenshot coming",
+    "demo": "View demo",
+    "source": "View code",
+    "privateNote": "This project’s code is private: it is presented here through screenshots and a description.",
+    "year": "Year",
+    "yearTodo": "TODO: year",
+    "next": "Next project"
+  },
+  "Games": {
+    "title": "Games",
+    "intro": "Alongside the web, I’m an indie game developer: I design and publish my own games.",
+    "play": "See {title} on {platform}",
+    "published": "Published",
+    "upcomingTitle": "New games portfolio in the works",
+    "upcomingText": "A dedicated space for my games and prototypes is coming soon.",
+    "upcoming": "Coming soon"
+  },
+  "Education": {
+    "title": "Education",
+    "expected": "Expected {date}",
+    "yearTodo": "TODO: year obtained"
+  },
+  "Contact": {
+    "title": "Contact",
+    "intro": "A position, a freelance assignment or a product to launch? Write to me.",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "whatsappCta": "Message on WhatsApp",
+    "elsewhere": "Elsewhere on the web",
+    "cv": "Download my résumé",
+    "cvFr": "Résumé in French (PDF)",
+    "cvEn": "Résumé in English (PDF)",
+    "newTab": "(new tab)"
+  }
+}
