@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
     metadataBase: new URL(SITE_URL),
     title: { default: t('homeTitle'), template: `%s · ${t('siteName')}` },
     description: t('homeDescription'),
+    formatDetection: { telephone: false, email: false, address: false },
     applicationName: t('siteName'),
     authors: [{ name: 'Ilyas Benyahia', url: SITE_URL }],
     creator: 'Ilyas Benyahia',

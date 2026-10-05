@@ -1,4 +1,5 @@
-import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { About } from '@/components/sections/About';
 import { Contact } from '@/components/sections/Contact';
 import { EducationList } from '@/components/sections/EducationList';
@@ -9,7 +10,10 @@ import { Projects } from '@/components/sections/Projects';
 import { Skills } from '@/components/sections/Skills';
 import { SiteZellige } from '@/components/zellige/SiteZellige';
 import { ZelligeReveal } from '@/components/zellige/ZelligeReveal';
+import { JsonLd } from '@/components/seo/JsonLd';
 import type { Locale } from '@/i18n/routing';
+import { pageMetadata } from '@/lib/seo';
+import { homeGraph } from '@/lib/structured-data';
 
 /** Full-colour mosaic band: used twice at most on the whole site (see CLAUDE.md). */
 function MosaicSeparator() {
@@ -20,13 +24,28 @@ function MosaicSeparator() {
   );
 }
 
+export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
+  const locale = (await params).locale as Locale;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  return pageMetadata({
+    locale,
+    title: t('homeTitle'),
+    description: t('homeDescription'),
+    siteName: t('siteName'),
+    type: 'profile',
+    absoluteTitle: true,
+  });
+}
+
 export default async function HomePage({ params }: PageProps<'/[locale]'>) {
   const { locale } = await params;
   // The locale layout has already validated the segment.
   setRequestLocale(locale as Locale);
+  const t = await getTranslations('Metadata');
 
   return (
     <>
+      <JsonLd data={homeGraph(locale as Locale, t('homeTitle'), t('homeDescription'))} />
       <Hero />
       <MosaicSeparator />
       <About index={1} />

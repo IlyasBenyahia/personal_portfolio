@@ -74,6 +74,22 @@ src/zellige/              config.ts (tuile du site), tiles/*.svg, README.md
   Projets placeholder : `placeholder: true` (badge + `noindex`).
 - Les compétences de `skills.ts` sont la seule source des objets du mini-jeu.
 
+## SEO
+
+- `src/lib/seo.ts` : `pageMetadata()` (titre et description uniques par page et
+  par langue, canonical, hreflang fr/en/x-default, Open Graph, Twitter).
+- `src/lib/structured-data.ts` + `<JsonLd>` : Person (sameAs), WebSite,
+  ProfilePage (accueil), CreativeWork + BreadcrumbList (études de cas),
+  BlogPosting (blog, non publié).
+- Images OG/Twitter générées au build par `opengraph-image.tsx` /
+  `twitter-image.tsx` (`src/lib/og.tsx`, polices `@fontsource` en WOFF). Les
+  routes d'image ont besoin de **tous** les params dans `generateStaticParams`.
+- `sitemap.ts` et `robots.ts` statiques ; les projets `placeholder` sont
+  `noindex` et absents du sitemap.
+- Blog : `src/app/[locale]/_blog` (dossier privé, non routé) + `src/lib/blog.ts`
+  - `src/content/blog/{fr,en}/*.mdx`. Procédure de publication :
+    `src/content/blog/README.md`.
+
 ## Thème et design (direction B « Atelier Zellige »)
 
 - Jetons CSS dans `globals.css` : `--bg --surface --fg --muted --line --accent
@@ -128,7 +144,7 @@ Variables d'environnement : voir `.env.example` (`.env` est ignoré par git).
 - [x] Prototype zellige (validé : direction B)
 - [x] Phase 1 : socle (i18n statique, thème, polices, layout, Cloudflare, docs)
 - [x] Phase 2 : contenus typés + toutes les sections + études de cas
-- [ ] Phase 3 : SEO (metadata, hreflang, sitemap, robots, JSON-LD, OG, blog caché)
+- [x] Phase 3 : SEO (metadata, hreflang, sitemap, robots, JSON-LD, OG, blog caché)
 - [ ] Phase 4 : contact Web3Forms, analytics (Umami + Cloudflare), images
 - [ ] Phase 5 : mini-jeu « Ship It! »
 - [ ] Phase 6 : audit a11y/perf, Lighthouse, guide de déploiement, TODO finaux

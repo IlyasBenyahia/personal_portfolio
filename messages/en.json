@@ -2,7 +2,7 @@
   "Metadata": {
     "siteName": "Ilyas Benyahia",
     "homeTitle": "Ilyas Benyahia · Front-end Developer & UI/UX Designer, Growth Engineer",
-    "homeDescription": "Ilyas Benyahia, React / Next.js front-end developer and UI/UX designer based in Morocco (Rabat). I design, build and grow digital products end to end."
+    "homeDescription": "Ilyas Benyahia, React / Next.js front-end developer in Morocco, UI/UX designer and growth engineer in the making: I design, build and grow digital products."
   },
   "Common": {
     "skipToContent": "Skip to content",
@@ -75,7 +75,7 @@
       },
       "grow": {
         "title": "Grow",
-        "description": "Technical and editorial SEO, Google Ads and Facebook Ads campaigns, marketing strategy."
+        "description": "My digital marketer side: technical and editorial SEO, Google Ads and Facebook Ads campaigns, marketing strategy."
       }
     }
   },
@@ -133,5 +133,17 @@
     "cvFr": "Résumé in French (PDF)",
     "cvEn": "Résumé in English (PDF)",
     "newTab": "(new tab)"
+  },
+  "Seo": {
+    "caseStudy": "Case study",
+    "caseStudyEyebrow": "Case study · Ilyas Benyahia"
+  },
+  "Blog": {
+    "title": "Devlog",
+    "description": "Notes on development, design and growth.",
+    "published": "Published on {date}",
+    "updated": "Updated on {date}",
+    "empty": "No posts yet.",
+    "back": "All posts"
   }
 }

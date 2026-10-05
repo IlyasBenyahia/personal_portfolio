@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .bg{fill:#f5f0e8}.s{fill:#b23a0a}
+    @media (prefers-color-scheme:dark){.bg{fill:#171412}.s{fill:#f0844f}}
+  </style>
+  <rect class="bg" width="32" height="32" rx="7"/>
+  <!-- {8/2} star, R = 12, same construction as the zellige pattern -->
+  <path class="s" d="M28 16L24.49 19.51L24.49 24.49L19.51 24.49L16 28L12.49 24.49L7.51 24.49L7.51 19.51L4 16L7.51 12.49L7.51 7.51L12.49 7.51L16 4L19.51 7.51L24.49 7.51L24.49 12.49Z"/>
+</svg>
