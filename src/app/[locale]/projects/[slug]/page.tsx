@@ -10,6 +10,9 @@ import { TodoText } from '@/components/ui/TodoText';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { formatYearMonth } from '@/lib/format';
+import { pageMetadata } from '@/lib/seo';
+import { caseStudyGraph } from '@/lib/structured-data';
+import { JsonLd } from '@/components/seo/JsonLd';
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -24,9 +27,17 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return {};
   const l = locale as Locale;
+  const t = await getTranslations({ locale: l, namespace: 'Seo' });
+  const tMeta = await getTranslations({ locale: l, namespace: 'Metadata' });
   return {
-    title: project.title[l],
-    description: project.summary[l],
+    ...pageMetadata({
+      locale: l,
+      path: `/projects/${slug}`,
+      title: `${project.title[l]} · ${t('caseStudy')}`,
+      description: project.summary[l],
+      siteName: tMeta('siteName'),
+      type: 'article',
+    }),
     // Placeholder case studies stay out of search results until filled in.
     robots: project.placeholder ? { index: false, follow: true } : undefined,
   };
@@ -54,6 +65,12 @@ export default async function CaseStudyPage({ params }: PageProps<'/[locale]/pro
 
   return (
     <article className="mx-auto max-w-6xl px-4 pt-10 pb-8 sm:px-6 sm:pt-14">
+      <JsonLd
+        data={caseStudyGraph(locale, project, {
+          home: tCommon('home'),
+          projects: tNav('projects'),
+        })}
+      />
       <nav aria-label={t('breadcrumb')}>
         <ol className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
           <li>
