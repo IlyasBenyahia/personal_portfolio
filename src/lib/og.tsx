@@ -17,7 +17,7 @@ const font = (pkg: string, file: string) =>
 
 /** The site tile as a line drawing, inlined as an SVG data URI (Satori renders <img>). */
 async function zelligeDataUri(cols: number, rows: number): Promise<string> {
-  const tile = await getSiteTile();
+  const tile = await getSiteTile('line');
   const paths = layoutTile(tile, cols, rows)
     .flatMap(({ motif, x, y }) =>
       (motif.outline ?? motif.pieces).map(

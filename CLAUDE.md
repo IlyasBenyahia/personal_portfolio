@@ -66,7 +66,7 @@ src/i18n/                 routing.ts, request.ts (serveur), locales.ts (constant
 src/lib/                  site, seo, structured-data, og, blog, analytics, web3forms, images
 src/assets/images/        images sources (optimisées au build, voir README du dossier)
 scripts/optimize-images.mjs  sharp → AVIF/WebP multi-tailles + manifeste (avant dev/build)
-src/zellige/              config.ts (tuile du site), tiles/*.svg, README.md
+src/zellige/              config.ts (tuile par variante), tiles/*.svg, README.md
 ```
 
 ## Contenus
@@ -114,7 +114,7 @@ src/zellige/              config.ts (tuile du site), tiles/*.svg, README.md
 
 - Chargé **au clic uniquement** : `GameLauncher` fait `import('./GameDialog')`
   (moteur compris, chunk séparé d'environ 7 Ko gzip, absent du chargement initial).
-- `PlayButton` (serveur) passe la tuile du site (`getSiteTile()`) et
+- `PlayButton` (serveur) passe la tuile `mosaic` (`getSiteTile('mosaic')`) et
   `skillGroups` : les plateformes sont la **même tuile remplaçable** que le
   site (pré-rendue en `Path2D` dans `sprites.ts`, transformations SVG gérées),
   et les objets à collecter sont **exactement** les compétences de `skills.ts`.
@@ -142,10 +142,11 @@ src/zellige/              config.ts (tuile du site), tiles/*.svg, README.md
 
 ## Motif zellige
 
-- Une seule tuile pour tout le site, choisie dans `src/zellige/config.ts`.
-  Le motif actuel est un placeholder calculé ; Ilyas fournira ses tuiles SVG
-  (Illustrator). **Format et procédure : `src/zellige/README.md`.**
-- `<SiteZellige>` (serveur) = `<Zellige>` + tuile du site. Variantes `line`
+- Une tuile par variante, choisie dans `src/zellige/config.ts`
+  (`SITE_TILES`) : `line` = `ma-tuile.svg` (tuile d'Ilyas, traits) ;
+  `mosaic` = motif calculé khatam (bandes couleur + plateformes du jeu).
+  **Format et procédure : `src/zellige/README.md`.**
+- `<SiteZellige>` (serveur) = `<Zellige>` + tuile de sa variante. Variantes `line`
   (par défaut partout) et `mosaic` (**2 séparateurs pleine couleur maximum**).
 - `<ZelligeReveal>` + `animate` : apparition en vague (fondu + léger zoom)
   depuis le centre, une fois, à l'entrée dans l'écran.

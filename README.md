@@ -74,8 +74,10 @@ dessinée dans Illustrator :
    `#E6D9C2` (neutral), `#1C1917` (ink). Pas de contour : le joint est ajouté
    automatiquement.
 3. Export SVG dans `src/zellige/tiles/ma-tuile.svg`.
-4. Dans `src/zellige/config.ts` :
-   `export const SITE_TILE: TileSource = { kind: 'svg', file: 'ma-tuile' };`
+4. Dans `src/zellige/config.ts`, choisissez la tuile de chaque variante
+   (`line` : traits fins du hero et du pied de page ; `mosaic` : bandes
+   pleine couleur et jeu), par exemple
+   `line: { kind: 'svg', file: 'ma-tuile' }`.
 
 Guide complet (raccords, rôles, réglages d'export) :
 [`src/zellige/README.md`](src/zellige/README.md).

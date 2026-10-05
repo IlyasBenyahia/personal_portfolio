@@ -1,30 +1,32 @@
 # Tuiles zellige : remplacer le motif par vos propres dessins
 
-Le site entier (fond du hero, séparateurs, pied de page et, plus tard, les
-plateformes du mini-jeu) utilise **une seule tuile**, choisie dans
-`src/zellige/config.ts`. Le motif actuel (étoile et croix « khatam »,
-calculé dans `src/components/zellige/geometry.ts`) est un **placeholder**.
+Le site utilise **une tuile par variante**, choisie dans
+`src/zellige/config.ts` :
+
+| Variante | Où                                                                | Tuile actuelle                                            |
+| -------- | ----------------------------------------------------------------- | --------------------------------------------------------- |
+| `line`   | fond du hero, bande du pied de page, 404, cadres vides, images OG | `ma-tuile.svg` (deux étoiles en traits)                   |
+| `mosaic` | les 2 bandes pleine couleur, plateformes du mini-jeu              | motif calculé « khatam » (étoile et croix, `geometry.ts`) |
 
 ## Changer de tuile en 3 étapes
 
 1. Dessinez la tuile dans Illustrator en suivant le format ci-dessous.
-2. Exportez-la dans ce dossier : `src/zellige/tiles/ma-tuile.svg`.
-3. Dans `src/zellige/config.ts`, remplacez la ligne :
+2. Exportez-la dans ce dossier, par exemple `src/zellige/tiles/ma-mosaique.svg`.
+3. Dans `src/zellige/config.ts`, choisissez la tuile de chaque variante :
 
    ```ts
-   export const SITE_TILE: TileSource = { kind: 'computed' };
+   export const SITE_TILES: Record<TileVariant, TileSource> = {
+     line: { kind: 'svg', file: 'ma-tuile' },
+     mosaic: { kind: 'svg', file: 'ma-mosaique' }, // ou { kind: 'computed' }
+   };
    ```
 
-   par :
+   puis lancez `npm run dev` ou `npm run build` (et rechargez la page). Une
+   erreur claire s'affiche si le fichier est introuvable ou illisible.
 
-   ```ts
-   export const SITE_TILE: TileSource = { kind: 'svg', file: 'ma-tuile' };
-   ```
-
-   puis lancez `npm run dev` ou `npm run build`. Une erreur claire s'affiche
-   si le fichier est introuvable ou illisible.
-
-Pour revenir au motif calculé : `{ kind: 'computed' }`.
+Pour revenir au motif calculé : `{ kind: 'computed' }`. Une tuile en traits
+seuls convient à `line` ; pour `mosaic`, dessinez des pièces **remplies**
+avec les couleurs de référence ci-dessous.
 
 ## Format attendu
 

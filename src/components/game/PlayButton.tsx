@@ -7,7 +7,7 @@ import { GameLauncher } from './GameLauncher';
 /** Server wrapper: hands the site tile, the skills (the game's only content) and the game texts to the launcher. */
 export async function PlayButton({ label, className }: { label: string; className?: string }) {
   const [tile, messages, t, locale] = await Promise.all([
-    getSiteTile(),
+    getSiteTile('mosaic'),
     getMessages(),
     getTranslations('Game'),
     getLocale(),
