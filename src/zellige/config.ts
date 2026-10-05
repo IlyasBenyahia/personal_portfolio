@@ -10,4 +10,4 @@
  */
 export type TileSource = { kind: 'computed' } | { kind: 'svg'; file: string };
 
-export const SITE_TILE: TileSource = { kind: 'computed' };
+export const SITE_TILE: TileSource = { kind: 'svg', file: 'ma-tuile' };
