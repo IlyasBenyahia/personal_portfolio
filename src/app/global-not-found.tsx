@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { fontVariables } from './fonts';
-import { Zellige } from '@/components/zellige/Zellige';
+import { SiteZellige } from '@/components/zellige/SiteZellige';
 import './globals.css';
 
 // Single static 404.html for both languages (no locale is known for an unmatched URL).
@@ -15,7 +15,7 @@ export default function GlobalNotFound() {
     <html lang="fr" className={fontVariables}>
       <body className="grid min-h-svh place-items-center px-4">
         <main className="w-full max-w-xl py-16 text-center">
-          <Zellige variant="line" cols={6} rows={1} className="mx-auto w-48 text-fg/40" />
+          <SiteZellige variant="line" cols={6} rows={1} className="mx-auto w-48 text-fg/40" />
           <h1 className="mt-8 font-display text-5xl font-semibold tracking-tight">404</h1>
           <p className="mt-4 text-lg">
             Cette page n’existe pas ou a été déplacée.
