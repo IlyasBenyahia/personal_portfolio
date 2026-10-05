@@ -59,6 +59,8 @@ src/components/
   ui/                     Section, SectionHeading, TodoText, Badge, ExternalLink…
   theme/                  ThemeToggle + script anti-flash
   zellige/                moteur du motif (voir plus bas)
+src/game/                 mini-jeu (types, level, engine, sprites) : Canvas, sans dépendance
+src/components/game/      PlayButton (serveur) → GameLauncher → GameDialog (import dynamique)
 src/i18n/                 routing.ts, navigation.ts, request.ts
 src/lib/                  site, seo, structured-data, og, blog, analytics, web3forms, images
 src/assets/images/        images sources (optimisées au build, voir README du dossier)
@@ -106,6 +108,24 @@ src/zellige/              config.ts (tuile du site), tiles/*.svg, README.md
 - Images : sources dans `src/assets/images/`, `<Picture image="…" sizes="…">`
   (AVIF + WebP, largeur/hauteur intrinsèques). `public/images/opt/` et le
   manifeste sont générés (gitignorés).
+
+## Mini-jeu « Ship It! »
+
+- Chargé **au clic uniquement** : `GameLauncher` fait `import('./GameDialog')`
+  (moteur compris, chunk séparé d'environ 7 Ko gzip, absent du chargement initial).
+- `PlayButton` (serveur) passe la tuile du site (`getSiteTile()`) et
+  `skillGroups` : les plateformes sont la **même tuile remplaçable** que le
+  site (pré-rendue en `Path2D` dans `sprites.ts`, transformations SVG gérées),
+  et les objets à collecter sont **exactement** les compétences de `skills.ts`.
+- Niveau déterministe (`level.ts`, PRNG à graine fixe) : 3 zones de 9000 px,
+  environ 90 s (environ 2 min en mode tranquille). Pas de game over : chute ou
+  choc = points perdus.
+- Couleurs lues dans les jetons CSS (clair/sombre). `prefers-reduced-motion` :
+  mode tranquille pré-coché, pas de parallaxe, d'oscillation ni de clignotement.
+- Contrôles : Espace / ↑ / W (double saut), P ou Échap = pause, tactile
+  (écran ou bouton « Sauter »), boutons Pause / Passer / Fermer. Meilleur
+  score : `localStorage['shipit:best']`. Annonces `aria-live` (zone,
+  compétence, chocs). Événements : `game_play`, `game_complete`, `game_skip`.
 
 ## Thème et design (direction B « Atelier Zellige »)
 
@@ -172,5 +192,5 @@ ne supporte pas ESLint 10 (`eslint-plugin-react` plante).
 - [x] Phase 2 : contenus typés + toutes les sections + études de cas
 - [x] Phase 3 : SEO (metadata, hreflang, sitemap, robots, JSON-LD, OG, blog caché)
 - [x] Phase 4 : contact Web3Forms, analytics (Umami + Cloudflare), images, maintenance
-- [ ] Phase 5 : mini-jeu « Ship It! »
+- [x] Phase 5 : mini-jeu « Ship It! »
 - [ ] Phase 6 : audit a11y/perf, Lighthouse, guide de déploiement, TODO finaux
