@@ -100,3 +100,14 @@ Un fichier d'exemple au format d'export Illustrator est fourni :
   vague depuis le centre (fondu et léger zoom), une seule fois, à l'entrée
   dans l'écran. Statique avec `prefers-reduced-motion` ou sans JavaScript.
 - **Mini-jeu** (phase 5) : les plateformes utiliseront la même tuile.
+
+## Vérifier après un changement de tuile
+
+```bash
+npm run build
+npm run test:visual          # échoue si le rendu change : normal après une nouvelle tuile
+npm run test:visual:update   # enregistre les nouvelles références une fois le rendu validé
+```
+
+Le test « rendu sans CSS de page » doit, lui, toujours passer : il garantit que
+la tuile s'affiche aussi dans Firefox et Safari.

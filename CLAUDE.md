@@ -166,6 +166,7 @@ npm run check         # lint + typecheck + format:check
 npm run deploy        # build + wrangler deploy (Cloudflare)
 npm run images        # optimise src/assets/images (lancé par predev/prebuild)
 npm run audit:prod    # audit des dépendances livrées (doit rester à 0)
+npm run test:visual   # régression visuelle (après build ; voir docs/visual-regression)
 ```
 
 Node 22 LTS (`.nvmrc`, `engines` ≥ 22.12). Variables d'environnement : voir
@@ -188,6 +189,11 @@ ne supporte pas ESLint 10 (`eslint-plugin-react` plante).
 - Zellige : jamais de copie de tracés par tuile. `<pattern>` pour les
   surfaces statiques, `<use>` pour les surfaces animées (déjà géré par
   `<Zellige>`). Surveiller la taille de `out/fr.html` (≈ 45 Ko gzip).
+- **Styles des pièces zellige en ligne uniquement** (`pieceStyle()` dans
+  `Zellige.tsx`) : Firefox et Safari n'appliquent pas les sélecteurs de page
+  aux clones `<use>` (régression de la phase 6, voir
+  `docs/visual-regression/`). Jamais de règle CSS du type
+  `.zellige--mosaic .z-primary`.
 - Sections sous la ligne de flottaison : classe `cv-auto`
   (`content-visibility: auto`, via `<Section>`).
 - Polices : Fraunces (axe `opsz` seul) et Inter préchargées, JetBrains Mono
@@ -215,4 +221,15 @@ ne supporte pas ESLint 10 (`eslint-plugin-react` plante).
 - [x] Phase 6 : audit a11y/perf, Lighthouse, guide de déploiement, TODO finaux
 
 Docs : `docs/DEPLOIEMENT.md` (Cloudflare, DNS Hostinger, Search Console),
+`docs/visual-regression/` (garde-fou zellige),
 `docs/lighthouse/` (rapports), `TODO.md` (tout ce qu'il reste à fournir).
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

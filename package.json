@@ -17,7 +17,9 @@
     "images": "node scripts/optimize-images.mjs",
     "predev": "npm run images",
     "prebuild": "npm run images",
-    "pretypecheck": "npm run images"
+    "pretypecheck": "npm run images",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots"
   },
   "dependencies": {
     "next": "^16.3.8",
@@ -31,6 +33,7 @@
     "@fontsource/fraunces": "^5.3.0",
     "@fontsource/inter": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
+    "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
@@ -39,9 +42,9 @@
     "eslint-config-next": "^16.3.8",
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3",
-    "sharp": "^0.35.5"
+    "typescript": "^6.0.3"
   },
   "engines": {
     "node": ">=22.12.0",
