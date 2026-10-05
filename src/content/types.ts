@@ -49,9 +49,13 @@ export interface SkillGroup {
 }
 
 export interface ProjectVisual {
-  /** Path under /public, or null while the capture is missing (rendered as a TODO frame). */
+  /**
+   * Path relative to src/assets/images (optimised at build), or null while the
+   * capture is missing (rendered as a TODO frame).
+   */
   src: string | null;
   alt: Localized;
+  /** Frame ratio while the capture is missing (real images use their own size). */
   width: number;
   height: number;
 }

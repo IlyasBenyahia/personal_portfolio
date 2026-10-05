@@ -49,7 +49,8 @@
   "Footer": {
     "rights": "© {year} Ilyas Benyahia",
     "builtWith": "Site statique conçu et développé par Ilyas Benyahia avec Next.js.",
-    "backToTop": "Retour en haut"
+    "backToTop": "Retour en haut",
+    "legal": "Mentions légales"
   },
   "About": {
     "title": "À propos",
@@ -145,5 +146,49 @@
     "updated": "Mis à jour le {date}",
     "empty": "Aucun article pour le moment.",
     "back": "Tous les articles"
+  },
+  "ContactForm": {
+    "title": "Écrire un message",
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "required": "obligatoire",
+    "submit": "Envoyer le message",
+    "sending": "Envoi en cours…",
+    "success": "Merci, votre message a bien été envoyé.",
+    "error": "L’envoi a échoué. Réessayez, ou écrivez-moi directement à {email}.",
+    "configError": "Le formulaire n’est pas encore configuré. Écrivez-moi directement à {email}.",
+    "errors": {
+      "nameRequired": "Indiquez votre nom.",
+      "emailRequired": "Indiquez votre adresse email.",
+      "emailInvalid": "Cette adresse email ne semble pas valide.",
+      "messageRequired": "Écrivez votre message.",
+      "messageShort": "Votre message est un peu court (10 caractères minimum).",
+      "summary": "Le formulaire contient {count, plural, one {# erreur} other {# erreurs}}."
+    },
+    "honeypot": "Ne pas remplir ce champ",
+    "privacy": "Vos données servent uniquement à vous répondre.",
+    "privacyLink": "En savoir plus",
+    "subject": "Nouveau message depuis benyahiailyas.com"
+  },
+  "Legal": {
+    "title": "Mentions légales et confidentialité",
+    "description": "Éditeur, hébergement, statistiques sans cookies, formulaire de contact et données personnelles du site benyahiailyas.com.",
+    "updated": "Dernière mise à jour : octobre 2026",
+    "publisherTitle": "Éditeur",
+    "publisher": "Ce site est édité par Ilyas Benyahia, à titre personnel, depuis Rabat / Témara (Maroc).",
+    "contact": "Contact :",
+    "hostingTitle": "Hébergement",
+    "hosting": "Le site est hébergé par Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, États-Unis (cloudflare.com).",
+    "analyticsTitle": "Statistiques de visite",
+    "analytics": "Pour comprendre comment le site est utilisé, j’utilise Cloudflare Web Analytics et Umami Cloud. Ces outils ne déposent aucun cookie et ne suivent pas les visiteurs d’un site à l’autre : ils mesurent des données agrégées (pages vues, durée de visite, pays, type d’appareil, clics sur certains boutons). Aucune bannière de consentement n’est donc affichée.",
+    "formTitle": "Formulaire de contact",
+    "form": "Les informations envoyées via le formulaire (nom, email, message) sont transmises par le service Web3Forms et me parviennent par email. Elles servent uniquement à vous répondre : elles ne sont ni revendues, ni utilisées pour de la prospection.",
+    "rightsTitle": "Vos données",
+    "rights": "Vous pouvez demander l’accès, la rectification ou la suppression de vos messages en m’écrivant à l’adresse ci-dessus.",
+    "storageTitle": "Stockage local",
+    "storage": "Le site enregistre dans votre navigateur (localStorage) votre choix de thème clair ou sombre et, si vous jouez au mini-jeu, votre meilleur score. Ces informations ne quittent pas votre appareil.",
+    "ipTitle": "Propriété intellectuelle",
+    "ip": "Les textes, visuels et le code de ce site sont la propriété d’Ilyas Benyahia, sauf mention contraire. Toute reproduction nécessite une autorisation préalable."
   }
 }

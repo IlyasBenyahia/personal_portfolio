@@ -7,6 +7,7 @@ import { PillarTag } from '@/components/ui/PillarTag';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { TodoText } from '@/components/ui/TodoText';
+import { trackAttrs } from '@/lib/analytics';
 
 export function Projects({ index }: { index: number }) {
   const t = useTranslations('Projects');
@@ -24,12 +25,18 @@ export function Projects({ index }: { index: number }) {
               key={project.slug}
               className="group relative flex flex-col rounded-2xl border border-line bg-surface p-4 transition-colors focus-within:border-fg/40 hover:border-fg/40"
             >
-              {cover && <ProjectVisual visual={cover} />}
+              {cover && (
+                <ProjectVisual
+                  visual={cover}
+                  sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw"
+                />
+              )}
               <div className="flex flex-1 flex-col px-2 pt-5 pb-2">
                 <ProjectBadges project={project} />
                 <h3 className="mt-4 font-display text-2xl font-semibold">
                   <Link
                     href={`/projects/${project.slug}`}
+                    {...trackAttrs('case_study_open', { slug: project.slug })}
                     aria-label={t('viewCaseOf', { title })}
                     className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-accent"
                   >

@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
+import { trackAttrs } from '@/lib/analytics';
 
 export function LocaleSwitcher() {
   const t = useTranslations('LocaleSwitcher');
@@ -19,6 +20,7 @@ export function LocaleSwitcher() {
               <Link
                 href={pathname}
                 locale={locale}
+                {...(active ? {} : trackAttrs('locale_switch', { to: locale }))}
                 hrefLang={locale}
                 lang={locale}
                 aria-current={active ? 'true' : undefined}

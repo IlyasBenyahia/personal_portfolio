@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { SiteZellige } from '@/components/zellige/SiteZellige';
 import { Link } from '@/i18n/navigation';
+import { trackAttrs } from '@/lib/analytics';
 
 const PILLARS = [
   { key: 'design', className: 'text-accent' },
@@ -59,6 +60,7 @@ export function Hero() {
           {/* TODO(phase 5): opens the "Ship It!" game dialog (dynamic import). */}
           <Link
             href={{ pathname: '/', hash: 'games' }}
+            {...trackAttrs('game_play')}
             className="rounded-full px-4 py-3 font-mono text-sm text-muted underline-offset-4 transition hover:text-fg hover:underline"
           >
             ▶ {t('ctaPlay')}

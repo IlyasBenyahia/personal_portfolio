@@ -9,6 +9,7 @@ export const dynamic = 'force-static';
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     { path: '', priority: 1 },
+    { path: '/legal', priority: 0.2 },
     // Placeholder case studies are noindex, so they stay out of the sitemap.
     ...projects
       .filter((p) => !p.placeholder)

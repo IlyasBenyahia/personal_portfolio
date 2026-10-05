@@ -3,6 +3,7 @@ import { profile } from '@/content/profile';
 import { SiteZellige } from '@/components/zellige/SiteZellige';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Picture } from '@/components/ui/Picture';
 import { TodoText } from '@/components/ui/TodoText';
 
 export function About({ index }: { index: number }) {
@@ -35,19 +36,27 @@ export function About({ index }: { index: number }) {
           </dl>
         </div>
 
-        {/* TODO: replace with the portrait (optimised at build in phase 4). */}
-        <figure className="relative isolate mx-auto aspect-[4/5] w-full max-w-sm self-center overflow-hidden rounded-2xl border border-dashed border-line bg-surface">
-          <SiteZellige
-            variant="line"
-            cols={4}
-            rows={5}
-            fit="slice"
-            className="absolute inset-0 -z-10 h-full text-fg opacity-15"
+        {profile.photo ? (
+          <Picture
+            image={profile.photo}
+            alt={t('photoAlt')}
+            sizes="(min-width: 768px) 384px, 100vw"
+            className="mx-auto aspect-[4/5] w-full max-w-sm self-center rounded-2xl object-cover"
           />
-          <figcaption className="grid h-full place-items-center p-6 text-center">
-            <TodoText value={t('photoTodo')} />
-          </figcaption>
-        </figure>
+        ) : (
+          <figure className="relative isolate mx-auto aspect-[4/5] w-full max-w-sm self-center overflow-hidden rounded-2xl border border-dashed border-line bg-surface">
+            <SiteZellige
+              variant="line"
+              cols={4}
+              rows={5}
+              fit="slice"
+              className="absolute inset-0 -z-10 h-full text-fg opacity-15"
+            />
+            <figcaption className="grid h-full place-items-center p-6 text-center">
+              <TodoText value={t('photoTodo')} />
+            </figcaption>
+          </figure>
+        )}
       </div>
     </Section>
   );

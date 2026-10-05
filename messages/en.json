@@ -49,7 +49,8 @@
   "Footer": {
     "rights": "© {year} Ilyas Benyahia",
     "builtWith": "Static site designed and built by Ilyas Benyahia with Next.js.",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "legal": "Legal notice"
   },
   "About": {
     "title": "About",
@@ -145,5 +146,49 @@
     "updated": "Updated on {date}",
     "empty": "No posts yet.",
     "back": "All posts"
+  },
+  "ContactForm": {
+    "title": "Send a message",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "required": "required",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "success": "Thank you, your message has been sent.",
+    "error": "Sending failed. Please try again, or email me directly at {email}.",
+    "configError": "The form isn’t configured yet. Please email me directly at {email}.",
+    "errors": {
+      "nameRequired": "Please enter your name.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "This email address doesn’t look valid.",
+      "messageRequired": "Please write your message.",
+      "messageShort": "Your message is a bit short (10 characters minimum).",
+      "summary": "The form has {count, plural, one {# error} other {# errors}}."
+    },
+    "honeypot": "Leave this field empty",
+    "privacy": "Your data is only used to reply to you.",
+    "privacyLink": "Learn more",
+    "subject": "New message from benyahiailyas.com"
+  },
+  "Legal": {
+    "title": "Legal notice and privacy",
+    "description": "Publisher, hosting, cookieless analytics, contact form and personal data on benyahiailyas.com.",
+    "updated": "Last updated: October 2026",
+    "publisherTitle": "Publisher",
+    "publisher": "This website is published by Ilyas Benyahia, as an individual, from Rabat / Témara (Morocco).",
+    "contact": "Contact:",
+    "hostingTitle": "Hosting",
+    "hosting": "The website is hosted by Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, United States (cloudflare.com).",
+    "analyticsTitle": "Visit statistics",
+    "analytics": "To understand how the site is used, I rely on Cloudflare Web Analytics and Umami Cloud. These tools set no cookies and do not track visitors across websites: they measure aggregated data (page views, visit duration, country, device type, clicks on some buttons). That is why no consent banner is shown.",
+    "formTitle": "Contact form",
+    "form": "Information sent through the form (name, email, message) is relayed by the Web3Forms service and reaches me by email. It is only used to reply to you: it is never sold or used for marketing.",
+    "rightsTitle": "Your data",
+    "rights": "You can ask for access to, correction or deletion of your messages by writing to the address above.",
+    "storageTitle": "Local storage",
+    "storage": "The site stores in your browser (localStorage) your light or dark theme choice and, if you play the mini-game, your best score. This information never leaves your device.",
+    "ipTitle": "Intellectual property",
+    "ip": "The texts, visuals and code of this website belong to Ilyas Benyahia unless stated otherwise. Any reproduction requires prior permission."
   }
 }
