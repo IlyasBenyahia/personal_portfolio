@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/Badge';
 import { ExternalLink } from '@/components/ui/ExternalLink';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { trackAttrs } from '@/lib/analytics';
 
 export function Games({ index }: { index: number }) {
   const t = useTranslations('Games');
@@ -29,6 +30,7 @@ export function Games({ index }: { index: number }) {
             <p className="mt-6">
               <ExternalLink
                 href={game.url}
+                {...trackAttrs('outbound_click', { target: 'itch' })}
                 className="inline-flex items-center gap-2 rounded-full border border-fg/30 px-5 py-2.5 font-medium transition hover:border-fg"
               >
                 {t('play', { title: game.title, platform: game.platform })} ↗

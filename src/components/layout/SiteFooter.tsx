@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { SiteZellige } from '@/components/zellige/SiteZellige';
+import { Link } from '@/i18n/navigation';
 
 export function SiteFooter() {
   const t = useTranslations('Footer');
@@ -10,6 +11,9 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>{t('rights', { year: new Date().getFullYear() })}</p>
           <p>{t('builtWith')}</p>
+          <Link href="/legal" className="underline-offset-4 hover:text-fg hover:underline">
+            {t('legal')}
+          </Link>
           <a
             href="#contenu"
             className="font-mono text-xs underline-offset-4 hover:text-fg hover:underline"

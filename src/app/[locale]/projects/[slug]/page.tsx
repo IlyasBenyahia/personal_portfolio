@@ -182,7 +182,7 @@ export default async function CaseStudyPage({ params }: PageProps<'/[locale]/pro
               </h2>
               <div className="mt-6 grid gap-6">
                 {project.visuals.slice(1).map((v, i) => (
-                  <ProjectVisual key={i} visual={v} />
+                  <ProjectVisual key={i} visual={v} sizes="(min-width: 1024px) 740px, 100vw" />
                 ))}
               </div>
             </section>

@@ -29,6 +29,6 @@ export const profile = {
     fr: '/cv/cv-ilyas-benyahia-fr.pdf',
     en: '/cv/cv-ilyas-benyahia-en.pdf',
   } satisfies Localized,
-  /** TODO: portrait photo for the About section (e.g. /images/ilyas-benyahia.jpg). */
+  /** TODO: portrait photo, path in src/assets/images (e.g. 'ilyas-benyahia.jpg'). */
   photo: null as string | null,
 };

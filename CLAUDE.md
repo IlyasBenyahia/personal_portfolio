@@ -47,6 +47,7 @@ src/app/
   (root)/                 « / » : redirige vers /fr ou /en (langue du navigateur)
   [locale]/               layout racine localisé (html lang) + accueil
   [locale]/projects/[slug] études de cas (une page par projet et par langue)
+  [locale]/legal          mentions légales et confidentialité
   global-not-found.tsx    404.html unique, bilingue
   fonts.ts, globals.css   polices et jetons de thème
 src/content/               données typées (profil, parcours, formation, compétences,
@@ -59,7 +60,9 @@ src/components/
   theme/                  ThemeToggle + script anti-flash
   zellige/                moteur du motif (voir plus bas)
 src/i18n/                 routing.ts, navigation.ts, request.ts
-src/lib/                  site.ts (constantes), analytics.ts (phase 4)
+src/lib/                  site, seo, structured-data, og, blog, analytics, web3forms, images
+src/assets/images/        images sources (optimisées au build, voir README du dossier)
+scripts/optimize-images.mjs  sharp → AVIF/WebP multi-tailles + manifeste (avant dev/build)
 src/zellige/              config.ts (tuile du site), tiles/*.svg, README.md
 ```
 
@@ -89,6 +92,20 @@ src/zellige/              config.ts (tuile du site), tiles/*.svg, README.md
 - Blog : `src/app/[locale]/_blog` (dossier privé, non routé) + `src/lib/blog.ts`
   - `src/content/blog/{fr,en}/*.mdx`. Procédure de publication :
     `src/content/blog/README.md`.
+
+## Formulaire, statistiques, images
+
+- Contact : `ContactForm` (client) → Web3Forms (`NEXT_PUBLIC_WEB3FORMS_KEY`),
+  validation maison, honeypot `botcheck`, messages bilingues, `aria-live`.
+- Statistiques : **toujours passer par `src/lib/analytics.ts`** (`track()` côté
+  client, `trackAttrs()` pour les composants serveur → attributs `data-track`
+  lus par `<Analytics>`). Umami et Cloudflare sont chargés après `load` + idle,
+  uniquement si leur variable d'environnement existe, et seulement sur
+  benyahiailyas.com (`data-domains`). Nouvel événement = l'ajouter à l'union
+  `AnalyticsEvent` et à `EVENT_NAMES`.
+- Images : sources dans `src/assets/images/`, `<Picture image="…" sizes="…">`
+  (AVIF + WebP, largeur/hauteur intrinsèques). `public/images/opt/` et le
+  manifeste sont générés (gitignorés).
 
 ## Thème et design (direction B « Atelier Zellige »)
 
@@ -126,9 +143,18 @@ npm run typecheck     # tsc --noEmit
 npm run format        # Prettier
 npm run check         # lint + typecheck + format:check
 npm run deploy        # build + wrangler deploy (Cloudflare)
+npm run images        # optimise src/assets/images (lancé par predev/prebuild)
+npm run audit:prod    # audit des dépendances livrées (doit rester à 0)
 ```
 
-Variables d'environnement : voir `.env.example` (`.env` est ignoré par git).
+Node 22 LTS (`.nvmrc`, `engines` ≥ 22.12). Variables d'environnement : voir
+`.env.example` (`.env` est ignoré par git).
+
+Dépendances : `npm audit` signale 5 alertes « high » sur `braces` (chaîne
+`eslint-config-next` → `fast-glob`), outil de dev uniquement, sans version
+corrigée publiée : ne pas lancer `npm audit fix --force` (il rétrograde
+`eslint-config-next` en v14). ESLint reste en v9 tant qu'`eslint-config-next`
+ne supporte pas ESLint 10 (`eslint-plugin-react` plante).
 
 ## Conventions
 
@@ -145,6 +171,6 @@ Variables d'environnement : voir `.env.example` (`.env` est ignoré par git).
 - [x] Phase 1 : socle (i18n statique, thème, polices, layout, Cloudflare, docs)
 - [x] Phase 2 : contenus typés + toutes les sections + études de cas
 - [x] Phase 3 : SEO (metadata, hreflang, sitemap, robots, JSON-LD, OG, blog caché)
-- [ ] Phase 4 : contact Web3Forms, analytics (Umami + Cloudflare), images
+- [x] Phase 4 : contact Web3Forms, analytics (Umami + Cloudflare), images, maintenance
 - [ ] Phase 5 : mini-jeu « Ship It! »
 - [ ] Phase 6 : audit a11y/perf, Lighthouse, guide de déploiement, TODO finaux

@@ -1,20 +1,22 @@
 import { useLocale, useTranslations } from 'next-intl';
 import type { ProjectVisual as Visual } from '@/content/types';
 import { SiteZellige } from '@/components/zellige/SiteZellige';
+import { Picture } from '@/components/ui/Picture';
 import { TodoText } from '@/components/ui/TodoText';
 
 /**
  * A project screenshot with fixed dimensions (no layout shift). While the
  * capture is missing, a TODO frame of the same size is shown.
- * TODO(phase 4): serve build-optimised AVIF/WebP sizes.
  */
 export function ProjectVisual({
   visual,
   priority = false,
+  sizes = '(min-width: 1152px) 1120px, 100vw',
   className,
 }: {
   visual: Visual;
   priority?: boolean;
+  sizes?: string;
   className?: string;
 }) {
   const locale = useLocale();
@@ -24,16 +26,12 @@ export function ProjectVisual({
 
   if (visual.src) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element -- static export, optimised at build (phase 4)
-      <img
-        src={visual.src}
+      <Picture
+        image={visual.src}
         alt={alt}
-        width={visual.width}
-        height={visual.height}
-        loading={priority ? 'eager' : 'lazy'}
-        decoding="async"
+        sizes={sizes}
+        priority={priority}
         className={`h-auto w-full rounded-xl border border-line object-cover ${className ?? ''}`}
-        style={ratio}
       />
     );
   }

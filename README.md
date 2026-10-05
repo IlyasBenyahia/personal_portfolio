@@ -7,6 +7,11 @@ Growth Engineer. Site 100 % statique, bilingue FR/EN.
 - next-intl (routes `/fr` et `/en`, sans middleware)
 - Hébergement : Cloudflare Workers Static Assets
 
+## Prérequis
+
+- **Node.js 22 LTS** (≥ 22.12, voir `.nvmrc` : `nvm use`) et npm ≥ 10.
+  Cloudflare lit aussi `.nvmrc` pour choisir la version de Node au build.
+
 ## Démarrer
 
 ```bash
@@ -24,6 +29,24 @@ Autres commandes : `npm run lint`, `npm run typecheck`, `npm run check`,
 - Textes de l'interface : `messages/fr.json` et `messages/en.json`.
 - Parcours, projets, compétences, formation, jeux, profil : `src/content/*.ts`
   (textes `{ fr, en }`, valeurs manquantes préfixées `TODO:`).
+
+## Images
+
+Déposez les originaux dans `src/assets/images/` : ils sont convertis en AVIF et
+WebP (plusieurs largeurs) avant chaque `dev` / `build`. Voir
+[`src/assets/images/README.md`](src/assets/images/README.md).
+
+## Variables d'environnement
+
+| Variable                         | Rôle                                           |
+| -------------------------------- | ---------------------------------------------- |
+| `NEXT_PUBLIC_WEB3FORMS_KEY`      | Clé publique Web3Forms (formulaire de contact) |
+| `NEXT_PUBLIC_UMAMI_WEBSITE_ID`   | Identifiant du site Umami Cloud                |
+| `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` | Jeton Cloudflare Web Analytics (facultatif)    |
+
+Elles sont intégrées au moment du build : à renseigner aussi dans les
+variables de build Cloudflare. Sans clé, le formulaire affiche un message
+invitant à écrire par email et aucune statistique n'est chargée.
 
 ## Motif zellige : utiliser vos propres tuiles
 
