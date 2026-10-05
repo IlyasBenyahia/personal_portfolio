@@ -61,7 +61,8 @@ src/components/
   zellige/                moteur du motif (voir plus bas)
 src/game/                 mini-jeu (types, level, engine, sprites) : Canvas, sans dépendance
 src/components/game/      PlayButton (serveur) → GameLauncher → GameDialog (import dynamique)
-src/i18n/                 routing.ts, navigation.ts, request.ts
+src/i18n/                 routing.ts, request.ts (serveur), locales.ts (constantes),
+                          navigation.tsx (Link localisé léger, basé sur next/link)
 src/lib/                  site, seo, structured-data, og, blog, analytics, web3forms, images
 src/assets/images/        images sources (optimisées au build, voir README du dossier)
 scripts/optimize-images.mjs  sharp → AVIF/WebP multi-tailles + manifeste (avant dev/build)
@@ -176,6 +177,24 @@ corrigée publiée : ne pas lancer `npm audit fix --force` (il rétrograde
 `eslint-config-next` en v14). ESLint reste en v9 tant qu'`eslint-config-next`
 ne supporte pas ESLint 10 (`eslint-plugin-react` plante).
 
+## Performance (règles issues de l'audit Lighthouse)
+
+- **Pas de next-intl côté client** : aucun `useTranslations` / `useLocale`
+  dans un composant `'use client'` (cela embarque le formateur ICU, ~20 Ko
+  gzip). Les composants serveur traduisent et passent les textes en props.
+  Exception : `GameDialog`, chargé à la demande, avec son propre provider.
+- Liens internes : `Link` de `@/i18n/navigation` (le nôtre, sur next/link),
+  `href` sans préfixe de langue (`'/legal'`, `{ pathname: '/', hash: 'x' }`).
+- Zellige : jamais de copie de tracés par tuile. `<pattern>` pour les
+  surfaces statiques, `<use>` pour les surfaces animées (déjà géré par
+  `<Zellige>`). Surveiller la taille de `out/fr.html` (≈ 45 Ko gzip).
+- Sections sous la ligne de flottaison : classe `cv-auto`
+  (`content-visibility: auto`, via `<Section>`).
+- Polices : Fraunces (axe `opsz` seul) et Inter préchargées, JetBrains Mono
+  non préchargée. Ne pas retirer le préchargement de Fraunces (CLS 0,11).
+- Mesurer : `npm run build && npx wrangler dev`, puis Lighthouse sur
+  `http://localhost:8787/fr` (voir `docs/lighthouse/README.md`).
+
 ## Conventions
 
 - Prettier : guillemets simples, point-virgule, 100 colonnes, tri des classes
@@ -193,4 +212,7 @@ ne supporte pas ESLint 10 (`eslint-plugin-react` plante).
 - [x] Phase 3 : SEO (metadata, hreflang, sitemap, robots, JSON-LD, OG, blog caché)
 - [x] Phase 4 : contact Web3Forms, analytics (Umami + Cloudflare), images, maintenance
 - [x] Phase 5 : mini-jeu « Ship It! »
-- [ ] Phase 6 : audit a11y/perf, Lighthouse, guide de déploiement, TODO finaux
+- [x] Phase 6 : audit a11y/perf, Lighthouse, guide de déploiement, TODO finaux
+
+Docs : `docs/DEPLOIEMENT.md` (Cloudflare, DNS Hostinger, Search Console),
+`docs/lighthouse/` (rapports), `TODO.md` (tout ce qu'il reste à fournir).

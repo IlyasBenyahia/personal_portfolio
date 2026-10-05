@@ -129,10 +129,13 @@ export default async function CaseStudyPage({ params }: PageProps<'/[locale]/pro
             </ul>
           </dd>
         </div>
-        <div className="flex flex-wrap content-start gap-4">
-          {project.pillars.map((p) => (
-            <PillarTag key={p} pillar={p} />
-          ))}
+        <div>
+          <dt className="font-mono text-xs tracking-widest text-muted uppercase">{t('pillars')}</dt>
+          <dd className="mt-1 flex flex-wrap gap-4">
+            {project.pillars.map((p) => (
+              <PillarTag key={p} pillar={p} />
+            ))}
+          </dd>
         </div>
       </dl>
 

@@ -8,7 +8,11 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   reactStrictMode: true,
   // Single 404.html shared by both locales (app/global-not-found.tsx).
-  experimental: { globalNotFound: true },
+  experimental: {
+    globalNotFound: true,
+    // Inline the (small) CSS into the HTML: no render-blocking request.
+    inlineCss: true,
+  },
 };
 
 export default createNextIntlPlugin('./src/i18n/request.ts')(nextConfig);

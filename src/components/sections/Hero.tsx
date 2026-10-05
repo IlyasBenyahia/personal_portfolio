@@ -24,7 +24,7 @@ export function Hero() {
         <p className="font-mono text-xs tracking-widest text-accent uppercase">{t('eyebrow')}</p>
         <h1
           id="hero-title"
-          className="mt-5 font-display text-5xl leading-[1.02] font-semibold tracking-tight [font-variation-settings:'opsz'_144,'SOFT'_50] sm:text-7xl lg:text-8xl"
+          className="mt-5 font-display text-5xl leading-[1.02] font-semibold tracking-tight [font-variation-settings:'opsz'_144] sm:text-7xl lg:text-8xl"
         >
           {t('title')}
         </h1>

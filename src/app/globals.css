@@ -100,3 +100,10 @@ body {
   outline-offset: 3px;
   border-radius: 2px;
 }
+
+/* Below-the-fold sections are only laid out and painted when they approach
+   the viewport (big win on mobile main-thread time). */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}

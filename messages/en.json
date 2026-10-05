@@ -107,7 +107,8 @@
     "privateNote": "This project’s code is private: it is presented here through screenshots and a description.",
     "year": "Year",
     "yearTodo": "TODO: year",
-    "next": "Next project"
+    "next": "Next project",
+    "pillars": "Pillars"
   },
   "Games": {
     "title": "Games",

@@ -1,16 +1,17 @@
 'use client';
 
 import { useEffect, useId, useRef, useState } from 'react';
-import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import { ThemeToggle, type ThemeLabels } from '@/components/theme/ThemeToggle';
 import { Link } from '@/i18n/navigation';
 
 interface Props {
   items: { id: string; label: string }[];
   labels: { open: string; close: string; nav: string };
+  themeLabels: ThemeLabels;
 }
 
 /** Disclosure menu below the lg breakpoint. Escape closes it and returns focus. */
-export function MobileMenu({ items, labels }: Props) {
+export function MobileMenu({ items, labels, themeLabels }: Props) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -72,7 +73,7 @@ export function MobileMenu({ items, labels }: Props) {
           </ul>
         </nav>
         <div className="mt-4">
-          <ThemeToggle />
+          <ThemeToggle labels={themeLabels} />
         </div>
       </div>
     </div>

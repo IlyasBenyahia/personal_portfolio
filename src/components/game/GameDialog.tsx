@@ -1,10 +1,16 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import {
+  NextIntlClientProvider,
+  useLocale,
+  useTranslations,
+  type AbstractIntlMessages,
+} from 'next-intl';
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import type { ZelligeTile } from '@/components/zellige/geometry';
 import type { Pillar, SkillGroup } from '@/content/types';
 import { localize } from '@/content/types';
+import type { Locale } from '@/i18n/locales';
 import { createGame, type GameController } from '@/game/engine';
 import { buildLevel } from '@/game/level';
 import { readColors } from '@/game/sprites';
@@ -37,8 +43,23 @@ interface Props {
   onClose: () => void;
 }
 
-/** The "Ship It!" game in a modal dialog. Loaded on demand (dynamic import). */
-export default function GameDialog({ tile, skills, onClose }: Props) {
+/**
+ * The "Ship It!" game in a modal dialog. Loaded on demand (dynamic import),
+ * with its own translations so message formatting stays in this chunk.
+ */
+export default function GameDialogWithMessages({
+  messages,
+  locale,
+  ...props
+}: Props & { messages: AbstractIntlMessages; locale: Locale }) {
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <GameDialog {...props} />
+    </NextIntlClientProvider>
+  );
+}
+
+function GameDialog({ tile, skills, onClose }: Props) {
   const t = useTranslations('Game');
   const tPillar = useTranslations('Hero.pillars');
   const locale = useLocale();

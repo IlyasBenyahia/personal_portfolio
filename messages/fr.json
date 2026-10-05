@@ -107,7 +107,8 @@
     "privateNote": "Le code de ce projet est privé : il est présenté ici par des captures et une description.",
     "year": "Année",
     "yearTodo": "TODO: année",
-    "next": "Projet suivant"
+    "next": "Projet suivant",
+    "pillars": "Piliers"
   },
   "Games": {
     "title": "Jeux",
