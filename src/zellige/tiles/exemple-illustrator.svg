@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Exemple au format d’export Illustrator : 1 plan de travail = 1 répétition (100 × 100). -->
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1{fill:#e6d9c2;}
+      .cls-2{fill:#0f766e;}
+      .cls-3{fill:#c2410c;}
+      .cls-4{fill:#1c1917;}
+    </style>
+  </defs>
+  <g id="neutral">
+    <polygon class="cls-1" points="29.29 0 70.71 0 100 29.29 100 70.71 70.71 100 29.29 100 0 70.71 0 29.29"/>
+  </g>
+  <g id="tertiary">
+    <polygon class="cls-2" points="0 -29.29 29.29 0 0 29.29 -29.29 0"/>
+  </g>
+  <g id="primary">
+    <polygon class="cls-3" points="50 20 54.76 38.52 71.21 28.79 61.48 45.24 80 50 61.48 54.76 71.21 71.21 54.76 61.48 50 80 45.24 61.48 28.79 71.21 38.52 54.76 20 50 38.52 45.24 28.79 28.79 45.24 38.52"/>
+  </g>
+  <circle id="ink" class="cls-4" cx="50" cy="50" r="6.83"/>
+</svg>

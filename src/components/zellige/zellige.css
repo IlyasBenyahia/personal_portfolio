@@ -1,0 +1,88 @@
+/* Zellige surfaces. Colours come from --z-* tokens (light / dark in globals.css). */
+
+.zellige {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+/* Mosaic: coloured pieces separated by grout lines in the page colour. */
+.zellige--mosaic path {
+  stroke: var(--z-grout);
+  stroke-width: var(--z-grout-width, 1.6);
+  stroke-linejoin: round;
+}
+.zellige--mosaic .z-primary {
+  fill: var(--z-primary);
+}
+.zellige--mosaic .z-secondary {
+  fill: var(--z-secondary);
+}
+.zellige--mosaic .z-tertiary {
+  fill: var(--z-tertiary);
+}
+.zellige--mosaic .z-neutral {
+  fill: var(--z-neutral);
+}
+.zellige--mosaic .z-ink {
+  fill: var(--z-ink);
+}
+/* Checkerboard alternation: every other cell swaps its two main colours. */
+.zellige--mosaic .zt[data-alt] .z-primary {
+  fill: var(--z-secondary);
+}
+.zellige--mosaic .zt[data-alt] .z-secondary {
+  fill: var(--z-primary);
+}
+
+/* Line: outlines only, in currentColor. */
+.zellige--line path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--z-line-width, 1);
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+}
+
+/* Tile-by-tile build, driven by --p (0→1) on an ancestor. */
+.zellige[data-animate] .zt {
+  --k: clamp(0, calc((var(--p, 1) * 1.15 - var(--t, 0)) * 7), 1);
+  opacity: var(--k);
+  transform: scale(calc(0.35 + 0.65 * var(--k))) rotate(calc((1 - var(--k)) * -90deg));
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.zellige-build {
+  --p: 1;
+  position: relative;
+}
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .zellige-build {
+    --p: 0;
+  }
+}
+.zellige-build__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zellige[data-animate] .zt {
+    opacity: 1;
+    transform: none;
+  }
+  .zellige-build {
+    height: auto !important;
+  }
+  .zellige-build__stage {
+    position: static;
+    height: auto;
+    padding-block: 4rem;
+  }
+}
